@@ -3,10 +3,16 @@ on:
   push:
   pull_request:
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v2
+    - run: docker build . -t dind:latest
   dind:
     runs-on: ubuntu-latest
     container:
-      image: docker:stable-dind
+      image: dind:latest
       options: --privileged
       env:
         GITHUB_ACTION: ${GITHUB_ACTION}
