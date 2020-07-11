@@ -8,12 +8,19 @@ jobs:
     steps:
     - name: Checkout sources
       uses: actions/checkout@v2
-    - run: docker build . -t dind:latest
+    - name: Build Docker image
+      uses: docker/build-push-action@v1
+      with:
+        registry: docker.pkg.github.com
+        username: joschi
+        password: ${{ secrets.GITHUB_TOKEN }}
+        repository: joschi/docker-in-docker-action-test/dind
+        tags: latest
   dind:
     runs-on: ubuntu-latest
     needs: build
     container:
-      image: dind:latest
+      image: docker.pkg.github.com/joschi/docker-in-docker-action-test/dind:latest
       options: --privileged
       env:
         GITHUB_ACTION: ${GITHUB_ACTION}
