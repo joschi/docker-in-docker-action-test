@@ -11,6 +11,7 @@ jobs:
     - run: docker build . -t dind:latest
   dind:
     runs-on: ubuntu-latest
+    needs: build
     container:
       image: dind:latest
       options: --privileged
