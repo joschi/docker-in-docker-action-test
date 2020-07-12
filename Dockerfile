@@ -11,4 +11,3 @@ add-apt-repository "deb https://deb.nodesource.com/node_12.x $(lsb_release -cs) 
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
 apt-get update -q && \
 apt-get install -y -q --no-install-recommends docker-ce docker-ce-cli containerd.io nodejs qemu qemu-user-static
-RUN docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
